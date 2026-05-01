@@ -39,6 +39,10 @@ public class ChronomancerEngine {
             artifactsAppraised += vaultLoot.size();
 
             System.out.println("Loot value appraised: " + appraiser.getTotalValue() + " gold.");
+
+            System.out.println("! TRAP ! " + hero.getName() + " takes 50 damage and loses all gold!");
+            hero.takeDamage(50);
+            hero.spendGold(hero.getGold());
         }
 
 
