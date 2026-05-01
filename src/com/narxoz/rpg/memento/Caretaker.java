@@ -2,6 +2,8 @@ package com.narxoz.rpg.memento;
 
 import com.narxoz.rpg.combatant.HeroMemento;
 
+import java.util.Stack;
+
 /**
  * Stores hero snapshots for the Chronomancer's Vault rewind mechanic.
  *
@@ -10,6 +12,7 @@ import com.narxoz.rpg.combatant.HeroMemento;
  */
 public class Caretaker {
 
+    private final Stack<HeroMemento> history = new Stack<>();
     /**
      * Saves a snapshot to the caretaker history.
      *
@@ -17,6 +20,9 @@ public class Caretaker {
      */
     public void save(HeroMemento memento) {
         // TODO: push the snapshot onto the history stack.
+        if (memento != null) {
+            history.push(memento);
+        }
     }
 
     /**
@@ -26,7 +32,7 @@ public class Caretaker {
      */
     public HeroMemento undo() {
         // TODO: pop the most recent snapshot from the history stack.
-        return null;
+        return history.isEmpty() ? null : history.pop();
     }
 
     /**
@@ -36,7 +42,7 @@ public class Caretaker {
      */
     public HeroMemento peek() {
         // TODO: read the top snapshot without exposing its internals.
-        return null;
+        return history.isEmpty() ? null : history.peek();
     }
 
     /**
@@ -46,6 +52,6 @@ public class Caretaker {
      */
     public int size() {
         // TODO: return the history size.
-        return 0;
+        return history.size();
     }
 }
