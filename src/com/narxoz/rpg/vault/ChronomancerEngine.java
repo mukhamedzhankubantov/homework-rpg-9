@@ -1,5 +1,8 @@
 package com.narxoz.rpg.vault;
 
+import com.narxoz.rpg.artifact.GoldAppraiser;
+import com.narxoz.rpg.artifact.Inventory;
+import com.narxoz.rpg.artifact.Weapon;
 import com.narxoz.rpg.combatant.Hero;
 import com.narxoz.rpg.memento.Caretaker;
 
@@ -27,6 +30,15 @@ public class ChronomancerEngine {
             System.out.println("--- Entering Vault: " + hero.getName() + " ---");
             caretaker.save(hero.createMemento());
             mementosCreated++;
+
+            Inventory vaultLoot = new Inventory();
+            vaultLoot.addArtifact(new Weapon("Excalibur", 500, 15, 20));
+
+            GoldAppraiser appraiser = new GoldAppraiser();
+            vaultLoot.accept(appraiser);
+            artifactsAppraised += vaultLoot.size();
+
+            System.out.println("Loot value appraised: " + appraiser.getTotalValue() + " gold.");
         }
 
 
