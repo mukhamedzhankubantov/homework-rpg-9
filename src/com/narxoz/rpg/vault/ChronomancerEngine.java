@@ -1,6 +1,8 @@
 package com.narxoz.rpg.vault;
 
 import com.narxoz.rpg.combatant.Hero;
+import com.narxoz.rpg.memento.Caretaker;
+
 import java.util.List;
 
 /**
@@ -16,6 +18,18 @@ public class ChronomancerEngine {
      */
     public VaultRunResult runVault(List<Hero> party) {
         // TODO: wire together mementos, visitors, and the vault sequence.
+        Caretaker caretaker = new Caretaker();
+        int artifactsAppraised = 0;
+        int mementosCreated = 0;
+        int restoredCount = 0;
+
+        for (Hero hero : party) {
+            System.out.println("--- Entering Vault: " + hero.getName() + " ---");
+            caretaker.save(hero.createMemento());
+            mementosCreated++;
+        }
+
+
         return new VaultRunResult(0, 0, 0);
     }
 }
