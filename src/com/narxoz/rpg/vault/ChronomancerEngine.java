@@ -43,9 +43,15 @@ public class ChronomancerEngine {
             System.out.println("! TRAP ! " + hero.getName() + " takes 50 damage and loses all gold!");
             hero.takeDamage(50);
             hero.spendGold(hero.getGold());
+
+            if (hero.getHp() < 20 || hero.getGold() == 0) {
+                System.out.println("Rewinding time for " + hero.getName() + "...");
+                hero.restoreFromMemento(caretaker.undo());
+                restoredCount++;
+            }
         }
 
 
-        return new VaultRunResult(0, 0, 0);
+        return new VaultRunResult(artifactsAppraised, mementosCreated, restoredCount);
     }
 }
