@@ -1,6 +1,6 @@
 package com.narxoz.rpg;
 
-import com.narxoz.rpg.artifact.Inventory;
+import com.narxoz.rpg.artifact.*;
 import com.narxoz.rpg.combatant.Hero;
 
 /**
@@ -17,6 +17,13 @@ public class Main {
         Hero alidar = new Hero("Alidar the Warrior", 100, 20, 15);
         Hero batyr = new Hero("Aiym the Mage", 70, 50, 10, 5, 100, new Inventory());
         // 2. Build an artifact inventory and exercise the visitor interface.
+        alidar.getInventory().addArtifact(new Weapon("Rusty Sword", 10, 5, 2));
+        batyr.getInventory().addArtifact(new Ring("Mana Ring", 150, 1, 10));
+
+        System.out.println("--- Scanning Initial Inventories ---");
+        ArtifactVisitor scanner = new EnchantmentScanner();
+        alidar.getInventory().accept(scanner);
+        batyr.getInventory().accept(scanner);
         // 3. Capture a hero snapshot through the memento workflow.
         // 4. Rewind the hero after a vault trap changes state.
         // 5. Run the ChronomancerEngine demo sequence.
