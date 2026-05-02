@@ -2,6 +2,10 @@ package com.narxoz.rpg;
 
 import com.narxoz.rpg.artifact.*;
 import com.narxoz.rpg.combatant.Hero;
+import com.narxoz.rpg.vault.ChronomancerEngine;
+import com.narxoz.rpg.vault.VaultRunResult;
+
+import java.util.List;
 
 /**
  * Entry point for Homework 9 — Chronomancer's Vault: Visitor + Memento.
@@ -27,6 +31,7 @@ public class Main {
         batyr.getInventory().accept(scanner);
 
         // 3. Capture a hero snapshot through the memento workflow.
+        // 4. Rewind the hero after a vault trap changes state.
         System.out.println("\n--- Testing Memento Rewind ---");
         var snapshot = alidar.createMemento();
 
@@ -36,8 +41,14 @@ public class Main {
 
         alidar.restoreFromMemento(snapshot);
         System.out.println("After rewind: " + alidar);
-        // 4. Rewind the hero after a vault trap changes state.
         // 5. Run the ChronomancerEngine demo sequence.
+        System.out.println("\n--- Starting Chronomancer Engine ---");
+        ChronomancerEngine engine = new ChronomancerEngine();
+        List<Hero> party = List.of(alidar, batyr);
+        VaultRunResult result = engine.runVault(party);
+
         // 6. Print a final VaultRunResult summary.
+        System.out.println("\n--- Final Vault Run Summary ---");
+        System.out.println(result);
     }
 }
