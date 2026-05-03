@@ -1,0 +1,47 @@
+@startuml
+title Memento Pattern - Chronomancer's Vault
+
+class Hero {
+    -String name
+    -int hp
+    -int mana
+    -int gold
+    -Inventory inventory
+    +createMemento() : HeroMemento
+    +restoreFromMemento(HeroMemento)
+}
+
+class HeroMemento {
+    -String name
+    -int hp
+    -int mana
+    -int gold
+    -List<Artifact> inventorySnapshot
+    ~getName()
+    ~getHp()
+    ~getMana()
+    ~getGold()
+    ~getInventorySnapshot()
+}
+
+class Caretaker {
+    -Stack<HeroMemento> history
+    +save(HeroMemento)
+    +undo() : HeroMemento
+}
+
+class ChronomancerEngine {
+    +runVault(List<Hero>)
+}
+
+class Main {
+    +main(String[])
+}
+
+Caretaker "1" o-- "many" HeroMemento : stores
+Hero ..> HeroMemento : creates/restores
+ChronomancerEngine --> Hero : manages
+ChronomancerEngine --> Caretaker : uses
+Main --> ChronomancerEngine : executes
+
+@enduml

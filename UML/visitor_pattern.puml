@@ -1,0 +1,52 @@
+@startuml
+title Visitor Pattern - Artifact Appraisal System
+
+interface ArtifactVisitor {
+    +visit(Weapon)
+    +visit(Potion)
+    +visit(Scroll)
+    +visit(Ring)
+    +visit(Armor)
+}
+
+class GoldAppraiser implements ArtifactVisitor
+class EnchantmentScanner implements ArtifactVisitor
+class WeightCalculator implements ArtifactVisitor
+class InventoryLogger implements ArtifactVisitor
+
+abstract class Artifact {
+    -String name
+    -int value
+    -int weight
+    +{abstract} accept(ArtifactVisitor)
+}
+
+class Weapon extends Artifact {
+    +accept(ArtifactVisitor)
+}
+class Potion extends Artifact {
+    +accept(ArtifactVisitor)
+}
+class Scroll extends Artifact {
+    +accept(ArtifactVisitor)
+}
+class Ring extends Artifact {
+    +accept(ArtifactVisitor)
+}
+class Armor extends Artifact {
+    +accept(ArtifactVisitor)
+}
+
+class Inventory {
+    -List<Artifact> artifacts
+    +accept(ArtifactVisitor)
+}
+
+Inventory "1" *-- "many" Artifact
+ArtifactVisitor ..> Weapon : visits
+ArtifactVisitor ..> Potion : visits
+ArtifactVisitor ..> Scroll : visits
+ArtifactVisitor ..> Ring : visits
+ArtifactVisitor ..> Armor : visits
+
+@enduml
