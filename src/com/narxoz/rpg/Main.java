@@ -50,5 +50,11 @@ public class Main {
         // 6. Print a final VaultRunResult summary.
         System.out.println("\n--- Final Vault Run Summary ---");
         System.out.println(result);
+
+        // 4-ші Visitor-ды тексеру (Open/Closed Principle)
+        System.out.println("\n--- Phase 8: Testing Open/Closed Behavior ---");
+        ArtifactVisitor logger = new InventoryLogger();
+        System.out.println("Logging Alidar's inventory:");
+        alidar.getInventory().accept(logger);
     }
 }
